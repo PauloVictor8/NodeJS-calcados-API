@@ -22,4 +22,6 @@ export default [...compat.extends("plugin:@typescript-eslint/recommended"), {
     rules: {
         semi: 'error'
     },
+
+    ignores: [".dist/*"]
 }];
