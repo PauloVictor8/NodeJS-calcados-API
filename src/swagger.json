@@ -1,0 +1,78 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Calçados API",
+        "description": "This is a API for footwear market",
+        "version": "0.1.9"
+    },
+    "servers": [
+        {
+            "url": "localhost:8888/api",
+            "description": "Local Server"
+        },
+        {
+            "url": "localhost:8888/api",
+            "description": "Cloud Server"
+        }
+    ],
+    "paths": {
+        "/login": {
+            "post": {
+                "summary": "Login User",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/User"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UserResponse"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid credentials"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "registration": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": ["registration", "password"]
+            },
+            "UserResponse": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
+                    },
+                    "refreshToken": {
+                        "type": "string"
+                    }
+                },
+                "required": ["token", "refreshToken"]
+            }
+        }
+    }
+}
