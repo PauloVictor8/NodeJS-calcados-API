@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint src/**/*.ts",
     "format": "eslint src/**/*.ts --fix",
-    "start": "npx tsc && node build/server.js",
+    "build": "npx tsc",
+    "start": " node build/server.js",
     "start:dev": "tsx watch src/server.ts"
   },
   "author": "",
