@@ -6,6 +6,7 @@ export class UserController {
 
     async create(req: Request, res: Response) {
         const user = req.body;
+        const saltRounds = 10;
 
         const existingUser = await prismaClient.user.findFirst({
             where: {
@@ -24,16 +25,17 @@ export class UserController {
             }
         }
 
-        const hashPassword = await bcrypt.hash(user.password, 10);
 
-        await prismaClient.user.create({
-            data: {
-                registration: user.registration,
-                name: user.name,
-                email: user.email,
-                password: hashPassword,
-                role: user.role,
-            }
+        await bcrypt.hash(user.password, saltRounds).then(async function(hash) {
+            await prismaClient.user.create({
+                data: {
+                    registration: user.registration,
+                    name: user.name,
+                    email: user.email,
+                    password: hash,
+                    role: user.role,
+                }
+            });
         });
 
         return res.json({ success: 'Usuário cadastrado.' });
