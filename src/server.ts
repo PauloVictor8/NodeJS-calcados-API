@@ -9,8 +9,8 @@ import { router } from './routes';
 const port = process.env.PORT || '3333';
 const app = express();
 
-router.use('/swagger', swaggerUi.serve);
-router.get('/swagger', swaggerUi.setup(swaggerDocument));
+app.use('/swagger', swaggerUi.serve);
+app.get('/swagger', swaggerUi.setup(swaggerDocument));
 
 app.use(express.json());
 app.use(router);
