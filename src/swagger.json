@@ -16,7 +16,7 @@
         }
     ],
     "paths": {
-        "/login": {
+        "/auth/login": {
             "post": {
                 "summary": "Login User",
                 "tags": ["auth"],
