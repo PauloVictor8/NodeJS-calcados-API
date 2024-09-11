@@ -11,7 +11,7 @@
             "description": "Local Server"
         },
         {
-            "url": "localhost:8888/api",
+            "url": "https://nodejs-calcados-api-production.up.railway.app/:8888/api",
             "description": "Cloud Server"
         }
     ],
