@@ -19,6 +19,7 @@
         "/login": {
             "post": {
                 "summary": "Login User",
+                "tags": ["auth"],
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -66,12 +67,9 @@
                 "properties": {
                     "token": {
                         "type": "string"
-                    },
-                    "refreshToken": {
-                        "type": "string"
                     }
                 },
-                "required": ["token", "refreshToken"]
+                "required": ["token"]
             }
         }
     }
