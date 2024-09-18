@@ -38,6 +38,6 @@ export class UserController {
             });
         });
 
-        return res.json({ success: 'Usuário cadastrado.' });
+        return res.json({ success: 'Usuário cadastrado com sucesso.' });
     }
 }
