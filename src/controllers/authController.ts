@@ -31,7 +31,7 @@ export class AuthController {
         }
 
 
-        return res.status(401).json({ error: 'Invalid credentials' });
+        return res.status(401).json({ error: 'Matrícula ou senha incorretos. Por favor, tente novamente.' });
     }
 
     async getProfile(req: Request, res: Response) {
