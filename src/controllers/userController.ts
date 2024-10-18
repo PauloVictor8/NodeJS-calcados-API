@@ -1,8 +1,20 @@
+import bcrypt from 'bcryptjs';
 import { Request, Response } from "express";
 import { prismaClient } from "../database/prismaClient";
-import bcrypt from 'bcryptjs'; 
 
 export class UserController {
+
+    async get(res: Response) {
+        const users = await prismaClient.user.findMany({
+            select: {
+                registration: true,
+                name: true,
+                email: true,
+                role: true,
+            }
+        });
+        return res.json(users);
+    }
 
     async create(req: Request, res: Response) {
         const user = req.body;
