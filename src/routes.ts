@@ -13,7 +13,7 @@ router.use(authMiddleware);
 
 router.get('/auth/profile', authController.getProfile);
 router.post('/auth/create-user', userController.create);
-router.post('/users', userController.get);
+router.get('/users', userController.get);
 
 export { router };
 
