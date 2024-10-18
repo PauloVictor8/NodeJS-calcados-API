@@ -24,11 +24,8 @@ export class AuthController {
                     expiresIn: '8h',
                 });
 
-                console.log(user);
-
                 return res.json({
-                    token: token,
-                    user: user
+                    token: token
                 });
 
             }
