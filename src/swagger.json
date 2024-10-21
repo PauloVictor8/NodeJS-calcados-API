@@ -46,6 +46,38 @@
                     }
                 }
             }
+        },
+        "/manager/register-user": {
+            "post": {
+                "summary": "Register new user",
+                "tags": ["manager"],
+                "responses": {
+                    "201": {
+                        "description": "User Created successfully"
+                    }
+                }
+            }
+        },
+        "/manager/user": {
+            "get": {
+                "summary": "Get Users",
+                "tags": ["manager"],
+                "responses": {
+                    "200": {
+                        "description": "Users retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/UsersInfo"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -70,6 +102,23 @@
                     }
                 },
                 "required": ["token"]
+            },
+            "UsersInfo": {
+                "type": "object",
+                "properties": {
+                    "registration": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "role": {
+                        "type": "string"
+                    }
+                }
             }
         }
     }
