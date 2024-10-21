@@ -35,7 +35,7 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
       return res.status(401).json({ error: 'Missing authorization header' });
     }
 
-    const token = authorization.split(' ')[1];
+    const token = authorization.split(' ').slice(1).join(' ');
     const payload = validateToken(token);
 
     if (!payload) {
