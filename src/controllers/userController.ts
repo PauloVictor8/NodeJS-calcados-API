@@ -4,17 +4,28 @@ import { prismaClient } from "../database/prismaClient";
 
 export class UserController {
 
-    async get(res: Response) {
+    async get(req: Request, res: Response) {
         const users = await prismaClient.user.findMany({
             select: {
                 registration: true,
                 name: true,
                 email: true,
-                role: true,
-            }
+                role: {
+                    select: {
+                        name: true
+                    }
+                }
+            }, 
         });
-        return res.json(users);
+    
+        const usersWithRoleName = users.map(user => ({
+            ...user,
+            role: user.role.name 
+        }));
+    
+        return res.json(usersWithRoleName);
     }
+    
 
     async create(req: Request, res: Response) {
         const user = req.body;
