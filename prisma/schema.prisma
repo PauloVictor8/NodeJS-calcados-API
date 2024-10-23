@@ -25,5 +25,53 @@ model User {
 model Role {
   role_id Int @id @default(autoincrement())
   name String
-  users    User[]
+  users User[]
 }
+
+model Product {
+  product_id Int @id @default(autoincrement())
+  name String
+  category_id Int
+  category Category @relation(fields: [category_id], references: [category_id])
+  product_items ProductItem[]
+}
+
+model Category {
+  category_id Int @id @default(autoincrement())
+  name String
+  products Product[]
+}
+
+model ProductItem {
+  product_item_id Int @id @default(autoincrement())
+  product_id Int
+  product Product @relation(fields: [product_id], references: [product_id])
+  color_id Int
+  color Color @relation(fields: [color_id], references: [color_id])
+  original_price Float
+  sale_price Float
+  size_id Int
+  size_option SizeOption @relation(fields: [size_id], references: [size_id])
+  product_images ProductImage[]
+}
+
+model Color {
+  color_id Int @id @default(autoincrement())
+  color_name String
+  product_items ProductItem[]
+}
+
+model SizeOption {
+  size_id Int @id @default(autoincrement())
+  size_name String
+  sort_order Int
+  product_items ProductItem[]
+}
+
+model ProductImage {
+  image_id Int @id @default(autoincrement()) 
+  product_item_id Int
+  product_item ProductItem @relation(fields: [product_item_id], references: [product_item_id])
+  image_filename String
+}
+
