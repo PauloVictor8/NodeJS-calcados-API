@@ -12,8 +12,11 @@ router.post('/auth/login', authController.login);
 router.use(authMiddleware);
 
 router.get('/auth/profile', authController.getProfile);
-router.post('/auth/create-user', userController.create);
+
 router.get('/users', userController.get);
+router.post('/users/create-user', userController.create);
+router.patch('/users/edit-user/:registration', userController.patch);
+router.delete('/users/delete-user/:registration', userController.delete);
 
 export { router };
 

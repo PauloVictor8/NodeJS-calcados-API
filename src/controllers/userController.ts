@@ -52,15 +52,57 @@ export class UserController {
             email: user.email,
             password: hash,
             role: {
-                connect: { role_id: user.role }
-            }
+              connect: { role_id: user.role },
+            },
           },
         });
       });
 
-      return res.json({ success: 'Usuário cadastrado com sucesso.' });
-    } catch (error: any) {
-        return res.status(500).json({ error: error.message });
+      return res.json({ message: 'Usuário cadastrado com sucesso.' });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Mensagem de erro:', error.message);
+      } else {
+        console.error('Erro desconhecido:', error);
+      }
+    }
+  }
+
+  async patch(req: Request, res: Response) {
+    try {
+      const userRegistration = req.params.registration;
+      const user = req.body;
+
+      await prismaClient.user.update({
+        where: { registration: userRegistration },
+        data: user,
+      });
+
+      return res.json({ message: 'Usuário atualizado com sucesso.' });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Mensagem de erro:', error.message);
+      } else {
+        console.error('Erro desconhecido:', error);
+      }
+    }
+  }
+
+  async delete(req: Request, res: Response) {
+    try {
+      const userRegistration = req.params.registration;
+
+      await prismaClient.user.delete({
+        where: { registration: userRegistration }
+      });
+
+      return res.json({ message: 'Usuário removido com sucesso.' });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.error('Mensagem de erro:', error.message);
+      } else {
+        console.error('Erro desconhecido:', error);
+      }
     }
   }
 }
