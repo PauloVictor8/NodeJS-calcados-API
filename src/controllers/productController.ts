@@ -8,8 +8,7 @@ export class ProductController {
                     name: true,
                     Category: {
                         select: {
-                            name: true,
-                            Product: true
+                            name: true
                         }
                     },
                     ProductItem: {
