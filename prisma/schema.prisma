@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,66 +7,68 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  registration String @id
-  name String
-  phone String @unique
-  email String @unique
-  password String
-  is_active Boolean
-  role Role @relation(fields: [role_id], references: [role_id])
-  role_id Int
-}
-
-model Role {
-  role_id Int @id @default(autoincrement())
-  name String
-  users User[]
-}
-
-model Product {
-  product_id Int @id @default(autoincrement())
-  name String
-  category_id Int
-  category Category @relation(fields: [category_id], references: [category_id])
-  product_items ProductItem[]
-}
-
 model Category {
-  category_id Int @id @default(autoincrement())
-  name String
-  products Product[]
-}
-
-model ProductItem {
-  product_item_id Int @id @default(autoincrement())
-  product_id Int
-  product Product @relation(fields: [product_id], references: [product_id])
-  color_id Int
-  color Color @relation(fields: [color_id], references: [color_id])
-  original_price Float
-  sale_price Float
-  size_id Int
-  size_option SizeOption @relation(fields: [size_id], references: [size_id])
-  product_images ProductImage[]
+  category_id Int       @id @default(autoincrement())
+  name        String
+  Product     Product[]
 }
 
 model Color {
-  color_id Int @id @default(autoincrement())
-  color_name String
-  product_items ProductItem[]
+  color_id    Int           @id @default(autoincrement())
+  color_name  String
+  ProductItem ProductItem[]
 }
 
-model SizeOption {
-  size_id Int @id @default(autoincrement())
-  size_name String
-  sort_order Int
-  product_items ProductItem[]
+model Product {
+  product_id  Int           @id @default(autoincrement())
+  name        String
+  category_id Int
+  Category    Category      @relation(fields: [category_id], references: [category_id])
+  ProductItem ProductItem[]
 }
 
 model ProductImage {
-  image_id Int @id @default(autoincrement()) 
+  image_id        Int         @id @default(autoincrement())
   product_item_id Int
-  product_item ProductItem @relation(fields: [product_item_id], references: [product_item_id])
-  image_filename String
+  image_filename  String
+  ProductItem     ProductItem @relation(fields: [product_item_id], references: [product_item_id])
+}
+
+model ProductItem {
+  product_item_id Int            @id @default(autoincrement())
+  product_id      Int
+  color_id        Int
+  original_price  Float
+  sale_price      Float
+  size_id         Int
+  ProductImage    ProductImage[]
+  Color           Color          @relation(fields: [color_id], references: [color_id])
+  Product         Product        @relation(fields: [product_id], references: [product_id])
+  SizeOption      SizeOption     @relation(fields: [size_id], references: [size_id])
+}
+
+model Role {
+  name    String
+  role_id Int    @id @default(autoincrement())
+  User    User[]
+}
+
+model SizeOption {
+  size_id     Int           @id @default(autoincrement())
+  size_name   String
+  sort_order  Int
+  ProductItem ProductItem[]
+}
+
+model User {
+  name         String
+  email        String  @unique
+  cpf          String @unique
+  sex          String
+  password     String
+  registration String  @id
+  role_id      Int
+  is_active    Boolean
+  phone        String  @unique
+  Role         Role    @relation(fields: [role_id], references: [role_id])
 }
