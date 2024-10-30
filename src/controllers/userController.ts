@@ -27,6 +27,35 @@ export class UserController {
     return res.json(usersWithRoleName);
   }
 
+  async getUserByRegistration(req: Request, res: Response) {
+    const { registration } = req.params;
+
+    const user = await prismaClient.user.findUnique({
+      select: {
+        registration: true,
+        name: true,
+        email: true,
+        phone: true,
+        role: {
+          select: {
+            name: true,
+          },
+        },
+        is_active: true
+      },
+      where: {
+        registration
+      }
+    });
+
+    const userWithRoleName = {
+      ...user,
+      role: user?.role.name,
+    };
+
+    return res.json(userWithRoleName);
+  }
+
   async getRoles(req: Request, res: Response) {
     const profiles = await prismaClient.role.findMany({
       select: {
