@@ -16,7 +16,7 @@ router.use(authMiddleware);
 router.get('/auth/profile', authController.getProfile);
 
 router.get('/users', userController.get);
-router.get('/users/:registration', userController.get);
+router.get('/users/:registration', userController.getUserByRegistration);
 router.get('/users/roles', userController.getRoles);
 router.post('/users/create-user', userController.create);
 router.patch('/users/edit-user/:registration', userController.patch);
