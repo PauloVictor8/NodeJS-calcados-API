@@ -16,8 +16,10 @@ datasource db {
 model User {
   registration String @id
   name String
+  phone String @unique
   email String @unique
   password String
+  is_active Boolean
   role Role @relation(fields: [role_id], references: [role_id])
   role_id Int
 }

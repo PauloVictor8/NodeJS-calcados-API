@@ -9,11 +9,13 @@ export class UserController {
         registration: true,
         name: true,
         email: true,
+        phone: true,
         role: {
           select: {
             name: true,
           },
         },
+        is_active: true
       },
     });
 
@@ -50,10 +52,12 @@ export class UserController {
             registration: user.registration,
             name: user.name,
             email: user.email,
+            phone: user.phone,
             password: hash,
             role: {
               connect: { role_id: user.role },
             },
+            is_active: true
           },
         });
       });
