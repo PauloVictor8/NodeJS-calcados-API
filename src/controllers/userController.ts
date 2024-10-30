@@ -119,15 +119,19 @@ export class UserController {
     try {
       const userRegistration = req.params.registration;
       const user = req.body;
+      const saltRounds = 10;
 
-      await prismaClient.user.update({
-        where: { registration: userRegistration },
-        data: {
-          ...user,
-          role: {
-            connect: { role_id: user.role },
+      await bcrypt.hash(user.password, saltRounds).then(async function (hash) {
+        await prismaClient.user.update({
+          where: { registration: userRegistration },
+          data: {
+            ...user,
+            password: hash,
+            role: {
+              connect: { role_id: user.role },
+            }
           }
-        }
+        });
       });
 
       return res.json({ message: 'Usuário atualizado com sucesso.' });
