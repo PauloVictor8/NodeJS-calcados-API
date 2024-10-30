@@ -24,6 +24,7 @@ router.get('/manage/products', productController.getProducts);
 
 router.get('/manage/products', productController.getProducts);
 router.post('/manage/products/register', productController.registerProduct);
+router.get('/manage/products/getall', productController.getProducts);
 
 export { router };
 
