@@ -122,7 +122,12 @@ export class UserController {
 
       await prismaClient.user.update({
         where: { registration: userRegistration },
-        data: user,
+        data: {
+          ...user,
+          role: {
+            connect: { role_id: user.role },
+          }
+        }
       });
 
       return res.json({ message: 'Usuário atualizado com sucesso.' });
