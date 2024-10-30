@@ -34,6 +34,8 @@ export class UserController {
       select: {
         registration: true,
         name: true,
+        cpf: true,
+        password: true,
         email: true,
         phone: true,
         role: {
