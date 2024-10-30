@@ -35,7 +35,6 @@ export class UserController {
         registration: true,
         name: true,
         cpf: true,
-        password: true,
         email: true,
         phone: true,
         role: {
@@ -50,12 +49,15 @@ export class UserController {
       }
     });
 
-    const userWithRoleName = {
-      ...user,
-      role: user?.role.name,
-    };
+    if(user) {
+      const userWithRoleName = {
+        ...user,
+        role: user?.role.name
+      };
+      return res.json(userWithRoleName);
+    }
 
-    return res.json(userWithRoleName);
+    return res.status(404).json({ error: 'Usuário não encontrado.' });
   }
 
   async getRoles(req: Request, res: Response) {
