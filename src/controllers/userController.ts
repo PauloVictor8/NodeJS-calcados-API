@@ -47,14 +47,10 @@ export class UserController {
       where: {
         registration
       }
-    });
+    }); 
 
     if(user) {
-      const userWithRoleName = {
-        ...user,
-        role: user?.role.name
-      };
-      return res.json(userWithRoleName);
+      return res.json(user);
     }
 
     return res.status(404).json({ error: 'Usuário não encontrado.' });
