@@ -16,8 +16,10 @@ datasource db {
 model User {
   registration String @id
   name String
+  phone String @unique
   email String @unique
   password String
+  is_active Boolean
   role Role @relation(fields: [role_id], references: [role_id])
   role_id Int
 }
@@ -74,4 +76,3 @@ model ProductImage {
   product_item ProductItem @relation(fields: [product_item_id], references: [product_item_id])
   image_filename String
 }
-
