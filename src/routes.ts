@@ -22,5 +22,8 @@ router.delete('/users/delete-user/:registration', userController.delete);
 
 router.get('/manage/products', productController.getProducts);
 
+router.get('/manage/products', productController.getProducts);
+router.post('/manage/products/register', productController.registerProduct);
+
 export { router };
 
