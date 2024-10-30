@@ -40,6 +40,7 @@ export class UserController {
         role: {
           select: {
             name: true,
+            role_id: true
           },
         },
         is_active: true
