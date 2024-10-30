@@ -27,6 +27,17 @@ export class UserController {
     return res.json(usersWithRoleName);
   }
 
+  async getRoles(req: Request, res: Response) {
+    const profiles = await prismaClient.role.findMany({
+      select: {
+        role_id: true,
+        name: true
+      }
+    });
+
+    return res.json(profiles);
+  }
+
   async create(req: Request, res: Response) {
     try {
       const user = req.body;
@@ -51,6 +62,8 @@ export class UserController {
           data: {
             registration: user.registration,
             name: user.name,
+            cpf: user.cpf,
+            sex: user.sex,
             email: user.email,
             phone: user.phone,
             password: hash,
